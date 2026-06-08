@@ -383,3 +383,66 @@ body[data-theme="light"] .song-item-title {
 body[data-theme="light"] .song-item-artist {
     color: #64748b;
 }
+
+.liquid-drip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    pointer-events: none;
+    filter: url('#liquid-goo');
+    z-index: 5;
+}
+
+.liquid-drip::before,
+.liquid-drip::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 40%;
+    transition: background-color 0.5s ease;
+}
+
+.liquid-drip::before,
+.liquid-drip::after {
+    background-color: #ff2a2a;
+    animation: liquidWave 12s infinite linear;
+}
+
+.liquid-drip::after {
+    border-radius: 35%;
+    background-color: #b31010;
+    animation: liquidWave 8s infinite linear;
+    opacity: 0.6;
+}
+
+body[data-theme="light"] .liquid-drip::before {
+    background-color: #2a86ff;
+}
+body[data-theme="light"] .liquid-drip::after {
+    background-color: #1052b3;
+}
+
+@keyframes liquidWave {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
