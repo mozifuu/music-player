@@ -50,13 +50,6 @@
         </div>
 
         <div class="song-list" id="songList"></div>
-
-        <div class="add-song-form">
-            <input type="text" id="inputTitle" placeholder="Judul Lagu" required>
-            <input type="text" id="inputArtist" placeholder="Nama Artis" required>
-            <input type="text" id="inputUrl" placeholder="URL Audio (.mp3) / Kosongkan untuk demo" value="">
-            <button class="btn-add" id="btnAddSong">add song</button>
-        </div>
         
         <div class="liquid-drip"></div>
     </div>
@@ -77,748 +70,137 @@
 </svg>
 </body>
 <script>
+// 1. DATA PLAYLIST LOKAL (122 LAGU ASLI)
 const defaultSongs = [
-    {
-        id: 1,
-        title: "A Different Way",
-        artist: "DJ Snake, Lauv",
-        url: "A_Different_Way.mp3"
-    },
-    {
-        id: 2,
-        title: "Again",
-        artist: "Noah Cyrus",
-        url: "again.mp3"
-    },
-    {
-        id: 3,
-        title: "back to friends",
-        artist: "sombr",
-        url: "back_to_friends.mp3"
-    },
-    {
-        id: 4,
-        title: "Beauty And A Beat",
-        artist: "Justin Bieber",
-        url: "Beauty_And_A_Beat.mp3"
-    },
-    {
-        id: 5,
-        title: "blue",
-        artist: "yung kai",
-        url: "blue.mp3"
-    },
-    {
-        id: 6,
-        title: "boyfriend",
-        artist: "Ariana Grande",
-        url: "boyfriend.mp3"
-    },
-    {
-        id: 7,
-        title: "Broken",
-        artist: "Isak Danielson",
-        url: "broken.mp3"
-    },
-    {
-        id: 8,
-        title: "Champion",
-        artist: "Neoni",
-        url: "Champion.mp3"
-    },
-    {
-        id: 9,
-        title: "Cold",
-        artist: "Alfie Castley",
-        url: "cold.mp3"
-    },
-    {
-        id: 10,
-        title: "Confess Your Love",
-        artist: "Jiandro",
-        url: "Confess_Your_Love.mp3"
-    },
-    {
-        id: 11,
-        title: "Consume (feat. Goon Des Garcons)",
-        artist: "Chase Atlantic",
-        url: "Consume.mp3"
-    },
-    {
-        id: 12,
-        title: "Dead Inside",
-        artist: "АДЛИН",
-        url: "Dead_Inside.mp3"
-    },
-    {
-        id: 13,
-        title: "Deja Vu",
-        artist: "TOMORROW X TOGETHER",
-        url: "dejavu.mp3"
-    },
-    {
-        id: 14,
-        title: "deserve",
-        artist: "Jake Clark",
-        url: "deserve.mp3"
-    },
-    {
-        id: 15,
-        title: "Devil in Disguise",
-        artist: "Marino",
-        url: "devil_in_disguise.mp3"
-    },
-    {
-        id: 16,
-        title: "DIA DELÍCIA",
-        artist: "Nakama",
-        url: "dia_delicia.mp3"
-    },
-    {
-        id: 17,
-        title: "Die On This Hill",
-        artist: "SIENNA SPIRO",
-        url: "Die_On_This_Hill.mp3"
-    },
-    {
-        id: 18,
-        title: "Dusk Till Dawn (Radio Edit)",
-        artist: "ZAYN",
-        url: "Dusk_Till_Dawn.mp3"
-    },
-    {
-        id: 19,
-        title: "FaSHioN",
-        artist: "CORTIS",
-        url: "FaSHioN.mp3"
-    },
-    {
-        id: 20,
-        title: "favorite lesson",
-        artist: "yaeow",
-        url: "favorite_lessons.mp3"
-    },
-    {
-        id: 21,
-        title: "Friends",
-        artist: "Chase Atlantic",
-        url: "friends.mp3"
-    },
-    {
-        id: 22,
-        title: "Gabriela",
-        artist: "KATSEYE",
-        url: "gabriella.mp3"
-    },
-    {
-        id: 23,
-        title: "Girl You Loud",
-        artist: "Chris Brown",
-        url: "Girl_You_Loud.mp3"
-    },
-    {
-        id: 24,
-        title: "Glue Song (feat. Clairo)",
-        artist: "Beabadoobee",
-        url: "glue.mp3"
-    },
-    {
-        id: 25,
-        title: "GO!",
-        artist: "CORTIS",
-        url: "go.mp3"
-    },
-    {
-        id: 26,
-        title: "Halfway There",
-        artist: "Jolianne",
-        url: "halfway_there.mp3"
-    },
-    {
-        id: 27,
-        title: "Heat Waves",
-        artist: "Glass Animals",
-        url: "Heat_Waves.mp3"
-    },
-    {
-        id: 28,
-        title: "Heaven",
-        artist: "TOMORROW X TOGETHER",
-        url: "heaven.mp3"
-    },
-    {
-        id: 29,
-        title: "Heaven Sent",
-        artist: "Tevomxntana",
-        url: "Heaven_Sent.mp3"
-    },
-    {
-        id: 30,
-        title: "HEAVY LOVE",
-        artist: "Odetari",
-        url: "heavy_love.mp3"
-    },
-    {
-        id: 31,
-        title: "her",
-        artist: "JVKE",
-        url: "her.mp3"
-    },
-    {
-        id: 32,
-        title: "I Got No Time",
-        artist: "The Living Tombstone",
-        url: "I_Got_No_Time.mp3"
-    },
-    {
-        id: 33,
-        title: "I Thought I Saw Your Face Today",
-        artist: "She & Him",
-        url: "I_Thought_I_Saw_Your_Face_Today.mp3"
-    },
-    {
-        id: 34,
-        title: "RINDAMAN (Feat. ZICO)",
-        artist: "PENOMECO",
-        url: "icn.mp3"
-    },
-    {
-        id: 35,
-        title: "IDFC (feat. Ravenna Golden)",
-        artist: "WHIPPED CREAM",
-        url: "idfc.mp3"
-    },
-    {
-        id: 36,
-        title: "IDGAF",
-        artist: "BoyWithUke",
-        url: "idgaf.mp3"
-    },
-    {
-        id: 37,
-        title: "If the World Was Ending",
-        artist: "JP Saxe",
-        url: "if_the_world_was_ending.mp3"
-    },
-    {
-        id: 38,
-        title: "If We Have Each Other",
-        artist: "Alec Benjamin",
-        url: "if_We_Have_Each_Other.mp3"
-    },
-    {
-        id: 39,
-        title: "I'm Not The Only One",
-        artist: "Sam Smith",
-        url: "Im_Not_The_Only_One.mp3"
-    },
-    {
-        id: 40,
-        title: "Into It",
-        artist: "Chase Atlantic",
-        url: "into_it.mp3"
-    },
-    {
-        id: 41,
-        title: "Intrusive Thoughts",
-        artist: "Natalie Jane",
-        url: "Intrusive_Thoughts.mp3"
-    },
-    {
-        id: 42,
-        title: "Jetzt weinst du",
-        artist: "HE; RO",
-        url: "Jetzt_weinst_du.mp3"
-    },
-    {
-        id: 43,
-        title: "Jus' Know",
-        artist: "BlackMayo",
-        url: "just_know.mp3"
-    },
-    {
-        id: 44,
-        title: "Kamin",
-        artist: "EMIN",
-        url: "kamin.mp3"
-    },
-    {
-        id: 45,
-        title: "KEEP UP",
-        artist: "Odetari",
-        url: "keep_up.mp3"
-    },
-    {
-        id: 46,
-        title: "Kembali Pulang",
-        artist: "Suara Kayu",
-        url: "Kembali_Pulang.mp3"
-    },
-    {
-        id: 47,
-        title: "Let You Break My Heart Again",
-        artist: "Laufey",
-        url: "let-you-break-my-heart-again.mp3"
-    },
-    {
-        id: 48,
-        title: "Johnny Huynh - LOCK ME OUT",
-        artist: "JohnnyHuynhVEVO",
-        url: "lock_me_out.mp3"
-    },
-    {
-        id: 49,
-        title: "Love For You",
-        artist: "LOVELI LORI",
-        url: "Love_For_You.mp3"
-    },
-    {
-        id: 50,
-        title: "Love Me Like That",
-        artist: "Neriah",
-        url: "Love_Me_Like_That.mp3"
-    },
-    {
-        id: 51,
-        title: "Love Me Not (feat. Rex Orange County)",
-        artist: "Ravyn Lenae",
-        url: "love_me_not.mp3"
-    },
-    {
-        id: 52,
-        title: "lovely",
-        artist: "Billie Eilish",
-        url: "lovely.mp3"
-    },
-    {
-        id: 53,
-        title: "Luxurious",
-        artist: "Gwen Stefani",
-        url: "luxurious.mp3"
-    },
-    {
-        id: 54,
-        title: "Mann vom Fach",
-        artist: "Levin Liam",
-        url: "Mann_vom_Fach.mp3"
-    },
-    {
-        id: 55,
-        title: "Mauern aus Granit",
-        artist: "NESS",
-        url: "Mauern_aus_Granit.mp3"
-    },
-    {
-        id: 56,
-        title: "mejikuhibiniu",
-        artist: "Tenxi",
-        url: "mejikuhibiniu.mp3"
-    },
-    {
-        id: 57,
-        title: "moonlight (kali uchis) (sped up viral)",
-        artist: "sped up viral",
-        url: "moonlight.mp3"
-    },
-    {
-        id: 58,
-        title: "Moonlit Floor (Kiss Me)",
-        artist: "LISA",
-        url: "Moonlit_Floor_Kiss_me.mp3"
-    },
-    {
-        id: 59,
-        title: "别让爱凋落",
-        artist: "卢润泽",
-        url: "my_love.mp3"
-    },
-    {
-        id: 60,
-        title: "Mitski - My Love Mine All Mine",
-        artist: "MitskiVEVO",
-        url: "My_Love_Mine_All_Mine.mp3"
-    },
-    {
-        id: 61,
-        title: "next door",
-        artist: "Amelia Moore",
-        url: "next_door.mp3"
-    },
-    {
-        id: 62,
-        title: "No One Noticed",
-        artist: "The Marías",
-        url: "No_One_Noticed.mp3"
-    },
-    {
-        id: 63,
-        title: "SZA - Nobody Gets Me (Audio)",
-        artist: "SZAVEVO",
-        url: "Nobody_Gets_Me.mp3"
-    },
-    {
-        id: 64,
-        title: "Not Into You",
-        artist: "Brooksie",
-        url: "not-into-you.mp3"
-    },
-    {
-        id: 65,
-        title: "ours to keep",
-        artist: "Kendis",
-        url: "ours_to_keep.mp3"
-    },
-    {
-        id: 66,
-        title: "Out of My League",
-        artist: "Fitz and The Tantrums",
-        url: "Out_of_My_League.mp3"
-    },
-    {
-        id: 67,
-        title: "Overrated",
-        artist: "NERIAH",
-        url: "overrated.mp3"
-    },
-    {
-        id: 68,
-        title: "邹沛沛 / Pank - 沉溺",
-        artist: "网易云音乐官方频道",
-        url: "pank.mp3"
-    },
-    {
-        id: 69,
-        title: "PELIGROSA",
-        artist: "FloyyMenor",
-        url: "peligrosa.mp3"
-    },
-    {
-        id: 70,
-        title: "Pretty Plzzz (Feat. B.I)",
-        artist: "LEO",
-        url: "prettyplzz.mp3"
-    },
-    {
-        id: 71,
-        title: "Rewrite The Stars",
-        artist: "James Arthur",
-        url: "rewrite_the_stars.mp3"
-    },
-    {
-        id: 72,
-        title: "Royalty",
-        artist: "Egzod",
-        url: "royality.mp3"
-    },
-    {
-        id: 73,
-        title: "Zara Larsson - Ruin My Life",
-        artist: "ZaraLarssonMusicVEVO",
-        url: "Ruin_My_Life.mp3"
-    },
-    {
-        id: 74,
-        title: "run for the hills",
-        artist: "Tate McRae",
-        url: "run_for_the_hills.mp3"
-    },
-    {
-        id: 75,
-        title: "Dutch Melrose - RUNRUNRUN",
-        artist: "Dutch Melrose",
-        url: "RUNRUNRUN.mp3"
-    },
-    {
-        id: 76,
-        title: "NERIAH - SH!TSHOW",
-        artist: "NERIAH",
-        url: "shitshow.mp3"
-    },
-    {
-        id: 77,
-        title: "Becky G - Shower (Audio)",
-        artist: "BeckyGVEVO",
-        url: "showers.mp3"
-    },
-    {
-        id: 78,
-        title: "SOS",
-        artist: "Zik",
-        url: "sos.mp3"
-    },
-    {
-        id: 79,
-        title: "STYLE",
-        artist: "Hearts2Hearts",
-        url: "style.mp3"
-    },
-    {
-        id: 80,
-        title: "Sugar (feat. Wynter)",
-        artist: "Flo Rida",
-        url: "sugar.mp3"
-    },
-    {
-        id: 81,
-        title: "Swim",
-        artist: "Chase Atlantic",
-        url: "swim.mp3"
-    },
-    {
-        id: 82,
-        title: "The Chase",
-        artist: "Hearts2Hearts",
-        url: "the_chase.mp3"
-    },
-    {
-        id: 83,
-        title: "The Fate of Ophelia",
-        artist: "Taylor Swift",
-        url: "The_Fate_of_Ophelia.mp3"
-    },
-    {
-        id: 84,
-        title: "The Lost Soul Down Floki",
-        artist: "wosie",
-        url: "the_lost_soul_down_floki.mp3"
-    },
-    {
-        id: 85,
-        title: "The Machine",
-        artist: "Reed Wonder",
-        url: "The_Machine.mp3"
-    },
-    {
-        id: 86,
-        title: "Touch",
-        artist: "KATSEYE",
-        url: "touch.mp3"
-    },
-    {
-        id: 87,
-        title: "Uncover",
-        artist: "Zara Larsson",
-        url: "uncover.mp3"
-    },
-    {
-        id: 88,
-        title: "VITAMINA",
-        artist: "Jombriel",
-        url: "vitamina.mp3"
-    },
-    {
-        id: 89,
-        title: "Water Fountain",
-        artist: "Alec Benjamin",
-        url: "Water_Fountain.mp3"
-    },
-    {
-        id: 90,
-        title: "WILDFLOWER",
-        artist: "Billie Eilish",
-        url: "wildflower.mp3"
-    },
-    {
-        id: 91,
-        title: "ГЛАМУР (feat. Wipo)",
-        artist: "UNIQE",
-        url: "wipo.mp3"
-    },
-    {
-        id: 92,
-        title: "Doja Cat - Woman (Visualizer)",
-        artist: "dojacatVEVO",
-        url: "woman.mp3"
-    },
-    {
-        id: 93,
-        title: "WRONG",
-        artist: "Chris Grey",
-        url: "wrong.mp3"
-    },
-    {
-        id: 94,
-        title: "Wrong Direction",
-        artist: "Hailee Steinfeld",
-        url: "Wrong_Direction.mp3"
-    },
-    {
-        id: 95,
-        title: "X (Remix)",
-        artist: "Nicky Jam",
-        url: "x.mp3"
-    },
-    {
-        id: 96,
-        title: "八方來財",
-        artist: "揽佬SKAI ISYOURGO...",
-        url: "yin_yang.mp3"
-    },
-    {
-        id: 97,
-        title: "you broke me first",
-        artist: "Tate McRae",
-        url: "you_broke_me_first.mp3"
-    },
-    {
-        id: 98,
-        title: "You Right",
-        artist: "Doja Cat",
-        url: "you_right.mp3"
-    },
-    {
-        id: 99,
-        title: "low cortisol",
-        artist: "Tia",
-        url: "low_cortisol.mp3"
-    },
-    {
-        id: 100,
-        title: "innocence",
-        artist: "hildir svensson",
-        url: "innocence.mp3"
-    },
-    {
-        id: 101,
-        title: "sweet boy",
-        artist: "malcolm todd",
-        url: "sweet_boy.mp3"
-    },
-    {
-        id: 102,
-        title: "cut that always bleeds",
-        artist: "conan gray",
-        url: "cut_that_always_bleeds.mp3"
-    },
-    {
-        id: 103,
-        title: "Doktorspiele",
-        artist: "Alex C., Yass",
-        url: "doktorspiele.mp3"
-    },
-    {
-        id: 104,
-        title: "Базовый минимум",
-        artist: "SABI, MIA BOYKA",
-        url: "basic_minimum.mp3"
-    },
-    {
-        id: 105,
-        title: "Lips Are Movin",
-        artist: "megan trainor",
-        url: "lips_are_movin.mp3"
-    },
-    {
-        id: 106,
-        title: "if u could see me cryin' in my room",
-        artist: "arash buana, raissa anggiani",
-        url: "if_u_could_see_me_cryin_in_my_room.mp3"
-    },
-    {
-        id: 107,
-        title: "梦臆",
-        artist: "赵方婧",
-        url: "dream_vision.mp3"
-    },
-    {
-        id: 108,
-        title: "Bad Habit",
-        artist: "Steve Lacy",
-        url: "songs/Bad_Habit.mp3"
-    },
-    {
-        id: 109,
-        title: "bye",
-        artist: "Altare",
-        url: "songs/bye.mp3"
-    },
-    {
-        id: 110,
-        title: "drop dead",
-        artist: "Olivia Rodrigo",
-        url: "songs/drop_dead.mp3"
-    },
-    {
-        id: 111,
-        title: "Feels",
-        artist: "Calvin Harris",
-        url: "songs/Feels.mp3"
-    },
-    {
-        id: 112,
-        title: "Heavy",
-        artist: "The Marías",
-        url: "songs/Heavy.mp3"
-    },
-    {
-        id: 113,
-        title: "Hell N Back",
-        artist: "Bakar",
-        url: "songs/Hell_N_Back.mp3"
-    },
-    {
-        id: 114,
-        title: "ilomilo",
-        artist: "Billie Eilish",
-        url: "songs/ilomilo.mp3"
-    },
-    {
-        id: 115,
-        title: "It's ok I'm ok",
-        artist: "Tate McRae",
-        url: "songs/Its_ok_Im_ok.mp3"
-    },
-    {
-        id: 116,
-        title: "perfect strangers",
-        artist: "Madelyn White",
-        url: "songs/perfect_strangers.mp3"
-    },
-    {
-        id: 117,
-        title: "Put Your Records On",
-        artist: "Corinne Bailey Rae",
-        url: "songs/Put_Your_Records_On.mp3"
-    },
-    {
-        id: 118,
-        title: "Say So",
-        artist: "Doja Cat",
-        url: "songs/Say_So.mp3"
-    },
-    {
-        id: 119,
-        title: "Self Aware",
-        artist: "Release",
-        url: "songs/Self_Aware.mp3"
-    },
-    {
-        id: 120,
-        title: "Sweetest Pie",
-        artist: "Megan Thee Stallion",
-        url: "songs/Sweetest_Pie.mp3"
-    },
-    {
-        id: 121,
-        title: "Take A Chance With Me",
-        artist: "NIKI",
-        url: "songs/Take_A_Chance_With_Me.mp3"
-    },
-    {
-        id: 122,
-        title: "The Less I Know The Better",
-        artist: "Tame Impala",
-        url: "songs/The_Less_I_Know_The_B.mp3"
-    },
-
+    { id: 1, title: "A Different Way", artist: "DJ Snake, Lauv", url: "A_Different_Way.mp3" },
+    { id: 2, title: "Again", artist: "Noah Cyrus", url: "again.mp3" },
+    { id: 3, title: "back to friends", artist: "sombr", url: "back_to_friends.mp3" },
+    { id: 4, title: "Beauty And A Beat", artist: "Justin Bieber", url: "Beauty_And_A_Beat.mp3" },
+    { id: 5, title: "blue", artist: "yung kai", url: "blue.mp3" },
+    { id: 6, title: "boyfriend", artist: "Ariana Grande", url: "boyfriend.mp3" },
+    { id: 7, title: "Broken", artist: "Isak Danielson", url: "broken.mp3" },
+    { id: 8, title: "Champion", artist: "Neoni", url: "Champion.mp3" },
+    { id: 9, title: "Cold", artist: "Alfie Castley", url: "cold.mp3" },
+    { id: 10, title: "Confess Your Love", artist: "Jiandro", url: "Confess_Your_Love.mp3" },
+    { id: 11, title: "Consume (feat. Goon Des Garcons)", artist: "Chase Atlantic", url: "Consume.mp3" },
+    { id: 12, title: "Dead Inside", artist: "АДЛИН", url: "Dead_Inside.mp3" },
+    { id: 13, title: "Deja Vu", artist: "TOMORROW X TOGETHER", url: "dejavu.mp3" },
+    { id: 14, title: "deserve", artist: "Jake Clark", url: "deserve.mp3" },
+    { id: 15, title: "Devil in Disguise", artist: "Marino", url: "devil_in_disguise.mp3" },
+    { id: 16, title: "DIA DELÍCIA", artist: "Nakama", url: "dia_delicia.mp3" },
+    { id: 17, title: "Die On This Hill", artist: "SIENNA SPIRO", url: "Die_On_This_Hill.mp3" },
+    { id: 18, title: "Dusk Till Dawn (Radio Edit)", artist: "ZAYN", url: "Dusk_Till_Dawn.mp3" },
+    { id: 19, title: "FaSHioN", artist: "CORTIS", url: "FaSHioN.mp3" },
+    { id: 20, title: "favorite lesson", artist: "yaeow", url: "favorite_lessons.mp3" },
+    { id: 21, title: "Friends", artist: "Chase Atlantic", url: "friends.mp3" },
+    { id: 22, title: "Gabriela", artist: "KATSEYE", url: "gabriella.mp3" },
+    { id: 23, title: "Girl You Loud", artist: "Chris Brown", url: "Girl_You_Loud.mp3" },
+    { id: 24, title: "Glue Song (feat. Clairo)", artist: "Beabadoobee", url: "glue.mp3" },
+    { id: 25, title: "GO!", artist: "CORTIS", url: "go.mp3" },
+    { id: 26, title: "Halfway There", artist: "Jolianne", url: "halfway_there.mp3" },
+    { id: 27, title: "Heat Waves", artist: "Glass Animals", url: "Heat_Waves.mp3" },
+    { id: 28, title: "Heaven", artist: "TOMORROW X TOGETHER", url: "heaven.mp3" },
+    { id: 29, title: "Heaven Sent", artist: "Tevomxntana", url: "Heaven_Sent.mp3" },
+    { id: 30, title: "HEAVY LOVE", artist: "Odetari", url: "heavy_love.mp3" },
+    { id: 31, title: "her", artist: "JVKE", url: "her.mp3" },
+    { id: 32, title: "I Got No Time", artist: "The Living Tombstone", url: "I_Got_No_Time.mp3" },
+    { id: 33, title: "I Thought I Saw Your Face Today", artist: "She & Him", url: "I_Thought_I_Saw_Your_Face_Today.mp3" },
+    { id: 34, title: "RINDAMAN (Feat. ZICO)", artist: "PENOMECO", url: "icn.mp3" },
+    { id: 35, title: "IDFC (feat. Ravenna Golden)", artist: "WHIPPED CREAM", url: "idfc.mp3" },
+    { id: 36, title: "IDGAF", artist: "BoyWithUke", url: "idgaf.mp3" },
+    { id: 37, title: "If the World Was Ending", artist: "JP Saxe", url: "if_the_world_was_ending.mp3" },
+    { id: 38, title: "If We Have Each Other", artist: "Alec Benjamin", url: "if_We_Have_Each_Other.mp3" },
+    { id: 39, title: "I'm Not The Only One", artist: "Sam Smith", url: "Im_Not_The_Only_One.mp3" },
+    { id: 40, title: "Into It", artist: "Chase Atlantic", url: "into_it.mp3" },
+    { id: 41, title: "Intrusive Thoughts", artist: "Natalie Jane", url: "Intrusive_Thoughts.mp3" },
+    { id: 42, title: "Jetzt weinst du", artist: "HE; RO", url: "Jetzt_weinst_du.mp3" },
+    { id: 43, title: "Jus' Know", artist: "BlackMayo", url: "just_know.mp3" },
+    { id: 44, title: "Kamin", artist: "EMIN", url: "kamin.mp3" },
+    { id: 45, title: "KEEP UP", artist: "Odetari", url: "keep_up.mp3" },
+    { id: 46, title: "Kembali Pulang", artist: "Suara Kayu", url: "Kembali_Pulang.mp3" },
+    { id: 47, title: "Let You Break My Heart Again", artist: "Laufey", url: "let-you-break-my-heart-again.mp3" },
+    { id: 48, title: "Johnny Huynh - LOCK ME OUT", artist: "JohnnyHuynhVEVO", url: "lock_me_out.mp3" },
+    { id: 49, title: "Love For You", artist: "LOVELI LORI", url: "Love_For_You.mp3" },
+    { id: 50, title: "Love Me Like That", artist: "Neriah", url: "Love_Me_Like_That.mp3" },
+    { id: 51, title: "Love Me Not (feat. Rex Orange County)", artist: "Ravyn Lenae", url: "love_me_not.mp3" },
+    { id: 52, title: "lovely", artist: "Billie Eilish", url: "lovely.mp3" },
+    { id: 53, title: "Luxurious", artist: "Gwen Stefani", url: "luxurious.mp3" },
+    { id: 54, title: "Mann vom Fach", artist: "Levin Liam", url: "Mann_vom_Fach.mp3" },
+    { id: 55, title: "Mauern aus Granit", artist: "NESS", url: "Mauern_aus_Granit.mp3" },
+    { id: 56, title: "mejikuhibiniu", artist: "Tenxi", url: "mejikuhibiniu.mp3" },
+    { id: 57, title: "moonlight (kali uchis) (sped up viral)", artist: "sped up viral", url: "moonlight.mp3" },
+    { id: 58, title: "Moonlit Floor (Kiss Me)", artist: "LISA", url: "Moonlit_Floor_Kiss_me.mp3" },
+    { id: 59, title: "别让爱凋落", artist: "卢润泽", url: "my_love.mp3" },
+    { id: 60, title: "Mitski - My Love Mine All Mine", artist: "MitskiVEVO", url: "My_Love_Mine_All_Mine.mp3" },
+    { id: 61, title: "next door", artist: "Amelia Moore", url: "next_door.mp3" },
+    { id: 62, title: "No One Noticed", artist: "The Marías", url: "No_One_Noticed.mp3" },
+    { id: 63, title: "SZA - Nobody Gets Me (Audio)", artist: "SZAVEVO", url: "Nobody_Gets_Me.mp3" },
+    { id: 64, title: "Not Into You", artist: "Brooksie", url: "not-into-you.mp3" },
+    { id: 65, title: "ours to keep", artist: "Kendis", url: "ours_to_keep.mp3" },
+    { id: 66, title: "Out of My League", artist: "Fitz and The Tantrums", url: "Out_of_My_League.mp3" },
+    { id: 67, title: "Overrated", artist: "NERIAH", url: "overrated.mp3" },
+    { id: 68, title: "邹沛沛 / Pank - 沉溺", artist: "网易云音乐官方频道", url: "pank.mp3" },
+    { id: 69, title: "PELIGROSA", artist: "FloyyMenor", url: "peligrosa.mp3" },
+    { id: 70, title: "Pretty Plzzz (Feat. B.I)", artist: "LEO", url: "prettyplzz.mp3" },
+    { id: 71, title: "Rewrite The Stars", artist: "James Arthur", url: "rewrite_the_stars.mp3" },
+    { id: 72, title: "Royalty", artist: "Egzod", url: "royality.mp3" },
+    { id: 73, title: "Zara Larsson - Ruin My Life", artist: "ZaraLarssonMusicVEVO", url: "Ruin_My_Life.mp3" },
+    { id: 74, title: "run for the hills", artist: "Tate McRae", url: "run_for_the_hills.mp3" },
+    { id: 75, title: "Dutch Melrose - RUNRUNRUN", artist: "Dutch Melrose", url: "RUNRUNRUN.mp3" },
+    { id: 76, title: "NERIAH - SH!TSHOW", artist: "NERIAH", url: "shitshow.mp3" },
+    { id: 77, title: "Becky G - Shower (Audio)", artist: "BeckyGVEVO", url: "showers.mp3" },
+    { id: 78, title: "SOS", artist: "Zik", url: "sos.mp3" },
+    { id: 79, title: "STYLE", artist: "Hearts2Hearts", url: "style.mp3" },
+    { id: 80, title: "Sugar (feat. Wynter)", artist: "Flo Rida", url: "sugar.mp3" },
+    { id: 81, title: "Swim", artist: "Chase Atlantic", url: "swim.mp3" },
+    { id: 82, title: "The Chase", artist: "Hearts2Hearts", url: "the_chase.mp3" },
+    { id: 83, title: "The Fate of Ophelia", artist: "Taylor Swift", url: "The_Fate_of_Ophelia.mp3" },
+    { id: 84, title: "The Lost Soul Down Floki", artist: "wosie", url: "the_lost_soul_down_floki.mp3" },
+    { id: 85, title: "The Machine", artist: "Reed Wonder", url: "The_Machine.mp3" },
+    { id: 86, title: "Touch", artist: "KATSEYE", url: "touch.mp3" },
+    { id: 87, title: "Uncover", artist: "Zara Larsson", url: "uncover.mp3" },
+    { id: 88, title: "VITAMINA", artist: "Jombriel", url: "vitamina.mp3" },
+    { id: 89, title: "Water Fountain", artist: "Alec Benjamin", url: "Water_Fountain.mp3" },
+    { id: 90, title: "WILDFLOWER", artist: "Billie Eilish", url: "wildflower.mp3" },
+    { id: 91, title: "ГЛАМУР (feat. Wipo)", artist: "UNIQE", url: "wipo.mp3" },
+    { id: 92, title: "Doja Cat - Woman (Visualizer)", artist: "dojacatVEVO", url: "woman.mp3" },
+    { id: 93, title: "WRONG", artist: "Chris Grey", url: "wrong.mp3" },
+    { id: 94, title: "Wrong Direction", artist: "Hailee Steinfeld", url: "Wrong_Direction.mp3" },
+    { id: 95, title: "X (Remix)", artist: "Nicky Jam", url: "x.mp3" },
+    { id: 96, title: "八方來財", artist: "揽佬SKAI ISYOURGO...", url: "yin_yang.mp3" },
+    { id: 97, title: "you broke me first", artist: "Tate McRae", url: "you_broke_me_first.mp3" },
+    { id: 98, title: "You Right", artist: "Doja Cat", url: "you_right.mp3" },
+    { id: 99, title: "low cortisol", artist: "Tia", url: "low_cortisol.mp3" },
+    { id: 100, title: "innocence", artist: "hildir svensson", url: "innocence.mp3" },
+    { id: 101, title: "sweet boy", artist: "malcolm todd", url: "sweet_boy.mp3" },
+    { id: 102, title: "cut that always bleeds", artist: "conan gray", url: "cut_that_always_bleeds.mp3" },
+    { id: 103, title: "Doktorspiele", artist: "Alex C., Yass", url: "doktorspiele.mp3" },
+    { id: 104, title: "Базовый минимум", artist: "SABI, MIA BOYKA", url: "basic_minimum.mp3" },
+    { id: 105, title: "Lips Are Movin", artist: "megan trainor", url: "lips_are_movin.mp3" },
+    { id: 106, title: "if u could see me cryin' in my room", artist: "arash buana, raissa anggiani", url: "if_u_could_see_me_cryin_in_my_room.mp3" },
+    { id: 107, title: "梦臆", artist: "赵方婧", url: "dream_vision.mp3" },
+    { id: 108, title: "Bad Habit", artist: "Steve Lacy", url: "songs/Bad_Habit.mp3" },
+    { id: 109, title: "bye", artist: "Altare", url: "songs/bye.mp3" },
+    { id: 110, title: "drop dead", artist: "Olivia Rodrigo", url: "songs/drop_dead.mp3" },
+    { id: 111, title: "Feels", artist: "Calvin Harris", url: "songs/Feels.mp3" },
+    { id: 112, title: "Heavy", artist: "The Marías", url: "songs/Heavy.mp3" },
+    { id: 113, title: "Hell N Back", artist: "Bakar", url: "songs/Hell_N_Back.mp3" },
+    { id: 114, title: "ilomilo", artist: "Billie Eilish", url: "songs/ilomilo.mp3" },
+    { id: 115, title: "It's ok I'm ok", artist: "Tate McRae", url: "songs/Its_ok_Im_ok.mp3" },
+    { id: 116, title: "perfect strangers", artist: "Madelyn White", url: "songs/perfect_strangers.mp3" },
+    { id: 117, title: "Put Your Records On", artist: "Corinne Bailey Rae", url: "songs/Put_Your_Records_On.mp3" },
+    { id: 118, title: "Say So", artist: "Doja Cat", url: "songs/Say_So.mp3" },
+    { id: 119, title: "Self Aware", artist: "Release", url: "songs/Self_Aware.mp3" },
+    { id: 120, title: "Sweetest Pie", artist: "Megan Thee Stallion", url: "songs/Sweetest_Pie.mp3" },
+    { id: 121, title: "Take A Chance With Me", artist: "NIKI", url: "songs/Take_A_Chance_With_Me.mp3" },
+    { id: 122, title: "The Less I Know The Better", artist: "Tame Impala", url: "songs/The_Less_I_Know_The_B.mp3" }
 ];
 
-let songs = JSON.parse(localStorage.getItem('offline_playlist')) || defaultSongs;
+let songs = [...defaultSongs];
 let isPlaying = false;
 let currentTrackIndex = 0;
-let playedIndexes = [];
 
-//DOM Elements
+// DOM Elements
 const audio = document.getElementById('audioPlayer');
 const playerCard = document.getElementById('playerCard');
 const btnPlay = document.getElementById('btnPlay');
@@ -833,12 +215,6 @@ const durationText = document.getElementById('duration');
 const songListContainer = document.getElementById('songList');
 const themeToggle = document.getElementById('themeToggle');
 
-//Form inputs
-const inputTitle = document.getElementById('inputTitle');
-const inputArtist = document.getElementById('inputArtist');
-const inputUrl = document.getElementById('inputUrl');
-const btnAddSong = document.getElementById('btnAddSong');
-
 window.addEventListener('DOMContentLoaded', () => {
     renderPlaylist();
     loadTrack(currentTrackIndex);
@@ -848,30 +224,32 @@ function toggleFlip() {
     playerCard.classList.toggle('flipped');
 }
 
+// 2. FUNGSI LOAD LAGU
 function loadTrack(index) {
-    if(songs.length === 0) {
-        trackName.innerText = "Tidak ada lagu";
-        artistName.innerText = "Silahkan tambah lagu baru";
-        audio.src = "";
-        return;
-    }
+    if(songs.length === 0) return;
     
     currentTrackIndex = index;
-    audio.src = songs[index].url;
-    trackName.innerText = songs[index].title;
-    artistName.innerText = songs[index].artist;
+    const currentSong = songs[index];
+
+    audio.src = currentSong.url;
+    trackName.innerText = currentSong.title;
+    artistName.innerText = currentSong.artist;
     
-    // Highlight track aktif di panel belakang
     document.querySelectorAll('.song-item').forEach((item, idx) => {
         if(idx === index) item.classList.add('active');
         else item.classList.remove('active');
     });
 }
 
+// 3. LOGIKA KONTROL AUDIO (SHUFFLE OTOMATIS)
 function playTrack() {
+    if (!audio.src || audio.src === window.location.href) {
+        let nextIndex = nextShuffleTrack();
+        loadTrack(nextIndex);
+    }
     isPlaying = true;
     btnPlay.innerText = "⏸";
-    audio.play().catch(e => console.log("Menunggu interaksi pengguna untuk memutar musik."));
+    audio.play().catch(e => console.log("Menunggu interaksi pengguna."));
 }
 
 function pauseTrack() {
@@ -882,7 +260,6 @@ function pauseTrack() {
 
 function nextShuffleTrack() {
     if (songs.length <= 1) return 0;
-    
     let randomIndex;
     do {
         randomIndex = Math.floor(Math.random() * songs.length);
@@ -891,6 +268,7 @@ function nextShuffleTrack() {
     return randomIndex;
 }
 
+// Event Listeners tombol utama
 btnPlay.addEventListener('click', () => {
     if (isPlaying) pauseTrack(); else playTrack();
 });
@@ -907,6 +285,7 @@ btnPrev.addEventListener('click', () => {
     playTrack();
 });
 
+// 4. TIMELINE & PROGRESS BAR
 audio.addEventListener('timeupdate', () => {
     if(audio.duration) {
         const progressPercent = (audio.currentTime / audio.duration) * 100;
@@ -940,14 +319,9 @@ audio.addEventListener('ended', () => {
     playTrack();
 });
 
-//add, deleted, select
+// 5. RENDER DAFTAR PLAYLIST
 function renderPlaylist() {
     songListContainer.innerHTML = '';
-    if(songs.length === 0) {
-        songListContainer.innerHTML = '<p style="color:var(--text-sub); text-align:center; font-size:12px;">Playlist kosong.</p>';
-        return;
-    }
-
     songs.forEach((song, index) => {
         const songItem = document.createElement('div');
         songItem.classList.add('song-item');
@@ -958,7 +332,6 @@ function renderPlaylist() {
                 <div class="song-item-title">${song.title}</div>
                 <div class="song-item-artist">${song.artist}</div>
             </div>
-            <button class="btn-delete" onclick="deleteTrack(${index}, event)">🗑</button>
         `;
         songListContainer.appendChild(songItem);
     });
@@ -970,53 +343,7 @@ function selectTrack(index) {
     toggleFlip();
 }
 
-btnAddSong.addEventListener('click', () => {
-    const title = inputTitle.value.trim();
-    const artist = inputArtist.value.trim();
-    const url = inputUrl.value.trim() || `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${Math.floor(Math.random() * 5) + 1}.mp3`;
-
-    if(title && artist) {
-        const newSong = {
-            id: Date.now(),
-            title: title,
-            artist: artist,
-            url: url
-        };
-        songs.push(newSong);
-        saveToLocalStorage();
-        renderPlaylist();
-    
-        inputTitle.value = '';
-        inputArtist.value = '';
-        inputUrl.value = '';
-
-        if(songs.length === 1) {
-            loadTrack(0);
-        }
-    } else {
-        alert('Mohon isi Judul dan Nama Artis terlebih dahulu.');
-    }
-});
-
-window.deleteTrack = function(index, event) {
-    event.stopPropagation();
-    songs.splice(index, 1);
-    saveToLocalStorage();
-    renderPlaylist();
-
-    if (index === currentTrackIndex) {
-        currentTrackIndex = 0;
-        loadTrack(currentTrackIndex);
-        if(isPlaying) playTrack();
-    } else if (index < currentTrackIndex) {
-        currentTrackIndex--;
-    }
-}
-
-function saveToLocalStorage() {
-    localStorage.setItem('offline_playlist', JSON.stringify(songs));
-}
-
+// 6. TOGGLE LIGHT / DARK THEME
 themeToggle.addEventListener('click', () => {
     const currentTheme = document.body.getAttribute('data-theme');
     if(currentTheme === 'light') {
