@@ -1,0 +1,11 @@
+# Sembunyikan credential / API Key Supabase
+config.js
+
+# Sembunyikan folder lagu lokal (jika ada) agar tidak membebani simpanan GitHub
+# Karena lagu sekarang sudah di-upload ke Supabase Storage
+songs/
+*.mp3
+
+# File sampah bawaan sistem operasi
+.DS_Store
+Thumbs.db
