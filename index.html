@@ -245,19 +245,52 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchSongsFromSupabase() {
-    // Ambil data playlist yang tersimpan di cloud Supabase
-    let { data, error } = await supabase
-        .from('playlist')
-        .select('*')
-        .order('id', { ascending: true });
+    try {
+        // 1. Cek dulu apakah tabel 'playlist' di Supabase masih kosong
+        let { data: currentCloudData, error: checkError } = await supabase
+            .from('playlist')
+            .select('id');
 
-    if (error) {
-        console.error("Gagal mengambil playlist cloud:", error);
+        if (checkError) throw checkError;
+
+        // 2. Jika cloud kosong, migrasikan SEMUA defaultSongs sekaligus (Bulk Insert)
+        if (currentCloudData && currentCloudData.length === 0) {
+            console.log("Database cloud kosong. Memulai migrasi data bawaan...");
+            
+            // Format ulang struktur data agar cocok dengan kolom di Supabase
+            const songsToMigrate = defaultSongs.map(s => ({
+                title: s.title,
+                artist: s.artist,
+                audio_url: s.url // Default songs menggunakan path lokal sebagai fallback awal
+            }));
+
+            // Tembak sekaligus semua data ke Supabase (jauh lebih cepat daripada di-loop satu-satu)
+            let { error: insertError } = await supabase
+                .from('playlist')
+                .insert(songsToMigrate);
+
+            if (insertError) throw insertError;
+            console.log("Migrasi data bawaan ke cloud sukses!");
+        }
+
+        // 3. Ambil data final yang sudah fix dari Supabase untuk dimainkan di player
+        let { data, error } = await supabase
+            .from('playlist')
+            .select('*')
+            .order('id', { ascending: true });
+
+        if (error) throw error;
+
+        // Masukkan data dari cloud ke array runtime aplikasi
+        songs = data;
+
+    } catch (err) {
+        // Jika ada masalah koneksi / skema tabel salah, fallback ke array lokal agar aplikasi tidak mati
+        console.error("Gagal memproses data cloud Supabase. Menggunakan data lokal. Detail:", err);
         songs = [...defaultSongs];
-    } else {
-        songs = data.length === 0 ? [...defaultSongs] : data;
     }
     
+    // 4. Render tampilan playlist dan siapkan lagunya
     renderPlaylist();
     loadTrack(currentTrackIndex);
 }
