@@ -61,6 +61,81 @@ body[data-theme="light"] .theme-toggle:hover {
     height: 540px;
 }
 
+.container-liquid-bg {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: transparent;
+    filter: url('#liquid-goo');
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.liquid-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    filter: blur(2px);
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blob-1 {
+    top: 10%;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 42, 42, 0.45);
+    animation: floatBlob1 16s infinite alternate ease-in-out;
+}
+
+.blob-2 {
+    bottom: 10%;
+    right: 5%;
+    width: 350px;
+    height: 350px;
+    background-color: rgba(179, 16, 16, 0.5);
+    animation: floatBlob2 20s infinite alternate ease-in-out;
+}
+
+.blob-3 {
+    top: 40%;
+    left: 30%;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 90, 90, 0.35);
+    animation: floatBlob3 14s infinite alternate ease-in-out;
+}
+
+body[data-theme="light"] .blob-1 {
+    background-color: rgba(42, 134, 255, 0.4);
+}
+body[data-theme="light"] .blob-2 {
+    background-color: rgba(16, 82, 179, 0.45);
+}
+body[data-theme="light"] .blob-3 {
+    background-color: rgba(90, 197, 255, 0.35);
+}
+
+/* Animasi pergerakan organik halus (Fluid Motion) */
+@keyframes floatBlob1 {
+    0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+    100% { transform: translate(80px, 50px) scale(1.15) rotate(120deg); }
+}
+
+@keyframes floatBlob2 {
+    0% { transform: translate(0px, 0px) scale(1.1) rotate(0deg); }
+    100% { transform: translate(-70px, -60px) scale(0.9) rotate(-180deg); }
+}
+
+@keyframes floatBlob3 {
+    0% { transform: translate(0px, 0px) scale(0.9) rotate(0deg); }
+    100% { transform: translate(50px, -40px) scale(1.2) rotate(90deg); }
+}
+
 .player-card {
     width: 100%;
     height: 100%;
@@ -382,67 +457,4 @@ body[data-theme="light"] .song-item-title {
 
 body[data-theme="light"] .song-item-artist {
     color: #64748b;
-}
-
-.liquid-drip {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    overflow: hidden;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-    pointer-events: none;
-    filter: url('#liquid-goo');
-    z-index: 5;
-}
-
-.liquid-drip::before,
-.liquid-drip::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    border-radius: 40%;
-    transition: background-color 0.5s ease;
-}
-
-.liquid-drip::before,
-.liquid-drip::after {
-    background-color: #ff2a2a;
-    animation: liquidWave 12s infinite linear;
-}
-
-.liquid-drip::after {
-    border-radius: 35%;
-    background-color: #b31010;
-    animation: liquidWave 8s infinite linear;
-    opacity: 0.6;
-}
-
-body[data-theme="light"] .liquid-drip::before {
-    background-color: #2a86ff;
-}
-body[data-theme="light"] .liquid-drip::after {
-    background-color: #1052b3;
-}
-
-@keyframes liquidWave {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    overflow: hidden;
 }

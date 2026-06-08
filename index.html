@@ -10,6 +10,12 @@
 <button class="theme-toggle" id="themeToggle">Light Mode</button>
 
 <div class="container-3d">
+    <div class="container-liquid-bg">
+        <div class="liquid-blob blob-1"></div>
+        <div class="liquid-blob blob-2"></div>
+        <div class="liquid-blob blob-3"></div>
+    </div>
+
     <div class="player-card" id="playerCard">
         
     <div class="card-face card-front">
@@ -62,8 +68,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
     <defs>
         <filter id="liquid-goo">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+        <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo" />
         <feBlend in="SourceGraphic" in2="goo" />
         </filter>
     </defs>
@@ -166,7 +172,7 @@ const defaultSongs = [
     { id: 92, title: "Doja Cat - Woman (Visualizer)", artist: "dojacatVEVO", url: "woman.mp3" },
     { id: 93, title: "WRONG", artist: "Chris Grey", url: "wrong.mp3" },
     { id: 94, title: "Wrong Direction", artist: "Hailee Steinfeld", url: "Wrong_Direction.mp3" },
-    { id: 95, title: "X (Remix)", artist: " Nicky Jam", url: "x.mp3" },
+    { id: 95, title: "X (Remix)", artist: "Nicky Jam", url: "x.mp3" },
     { id: 96, title: "八方來財", artist: "揽佬SKAI ISYOURGO...", url: "yin_yang.mp3" },
     { id: 97, title: "you broke me first", artist: "Tate McRae", url: "you_broke_me_first.mp3" },
     { id: 98, title: "You Right", artist: "Doja Cat", url: "you_right.mp3" },
